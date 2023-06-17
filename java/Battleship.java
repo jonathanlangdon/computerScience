@@ -1,12 +1,13 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Battleship {
 	public static void main(String[] args) {
 		System.out.printf("Welcome to Battleship!%n%n");
 		char[][] homeSea1 = new char[5][5];
 		char[][] homeSea2 = new char[5][5];
-		getHomeShips(1, homeSea1);
-		getHomeShips(2, homeSea2);
+		int [][] shipsArr1 = getHomeShips(1, homeSea1);
+		int [][] shipsArr2 = getHomeShips(2, homeSea2);
 		playGame();
 	}
 
@@ -44,7 +45,7 @@ public class Battleship {
 		System.out.printf("PLAYER %d WINS! YOU SUNK ALL OF YOUR OPPONENT’S SHIPS!%n", winner);
 	}
 
-	private static void getHomeShips(int playerNum, char[][] homeSea) {
+	private static int[][] getHomeShips(int playerNum, char[][] homeSea) {
 		int[][] homeShips = new int[5][2];
 		Scanner sc = new Scanner(System.in);
 		System.out.printf("PLAYER %d, ENTER YOUR SHIPS’ COORDINATES.%n", playerNum);
@@ -79,8 +80,9 @@ public class Battleship {
 		for (int i = 0; i<100; i++) {
 			System.out.printf("%n");
 		}
-			}
-
+		return homeShips;
+	}
+	
 	private static void fillSea(char[][] sea) {
 		for (char[] row: sea) {
 			for (int col = 0; col < row.length; col++) {
