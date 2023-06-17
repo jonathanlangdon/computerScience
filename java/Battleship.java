@@ -1,18 +1,21 @@
-import java.util.Scanner;
+import java.util.*;
+import java.io.*;
 
 public class Battleship {
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
 		System.out.printf("Welcome to Battleship!%n%n");
 		char[][] homeSea1 = new char[5][5];
 		char[][] homeSea2 = new char[5][5];
-		// int [][] shipsArr1 = getHomeShips(1, homeSea1);
-		// int [][] shipsArr2 = getHomeShips(2, homeSea2);
-		int[][] shipsArr1 = {{1,1},{1,2},{1,3},{1,4},{1,0}};
-		int[][] shipsArr2 = {{2,1},{2,2},{2,3},{2,4},{2,0}};
-		playGame(shipsArr1, shipsArr2);
+		int [][] shipsArr1 = getHomeShips(sc, 1, homeSea1);
+		int [][] shipsArr2 = getHomeShips(sc, 2, homeSea2);
+		// sample input to help troubleshoot
+		// int[][] shipsArr1 = {{1,1},{1,2},{1,3},{1,4},{1,0}};
+		// int[][] shipsArr2 = {{2,1},{2,2},{2,3},{2,4},{2,0}};
+		playGame(sc, shipsArr1, shipsArr2);
 	}
 	
-	private static void playGame(int[][] shipsArr1, int[][] shipsArr2) {
+	private static void playGame(Scanner sc, int[][] shipsArr1, int[][] shipsArr2) {
 		char[][] enemySea1 = new char[5][5];
 		fillSea(enemySea1);
 		char[][] enemySea2 = new char[5][5];
@@ -20,11 +23,11 @@ public class Battleship {
 		int hitsOn1 = 0;
 		int hitsOn2 = 0;
 		while(hitsOn1 < 5 && hitsOn2 < 5) {
-			hitsOn2 = fireOnTarget(hitsOn2, 1, enemySea2, shipsArr2);
+			hitsOn2 = fireOnTarget(sc, hitsOn2, 1, enemySea2, shipsArr2);
 			printBattleShip(enemySea2);
 			System.out.printf("%n");
 			if (hitsOn2 == 5) break;
-			hitsOn1 = fireOnTarget(hitsOn1, 2, enemySea1, shipsArr1);
+			hitsOn1 = fireOnTarget(sc, hitsOn1, 2, enemySea1, shipsArr1);
 			printBattleShip(enemySea1);
 			System.out.printf("%n");
 		}
@@ -39,8 +42,7 @@ public class Battleship {
 		printBattleShip(enemySea2);
 	}
 
-	private static int fireOnTarget(int hits, int activePlayer, char[][] enemySea, int[][] shipsArr) {
-		Scanner sc = new Scanner(System.in);
+	private static int fireOnTarget(Scanner sc, int hits, int activePlayer, char[][] enemySea, int[][] shipsArr) {
 		Boolean validInput = false;
 		int num1 = 0;
 		int num2 = 0;
@@ -79,9 +81,8 @@ public class Battleship {
 		return hits;
 	}
 	
-	private static int[][] getHomeShips(int playerNum, char[][] homeSea) {
+	private static int[][] getHomeShips(Scanner sc, int playerNum, char[][] homeSea) {
 		int[][] homeShips = new int[5][2];
-		Scanner sc = new Scanner(System.in);
 		System.out.printf("PLAYER %d, ENTER YOUR SHIPS’ COORDINATES.%n", playerNum);
 		for (int i = 0; i < 5; i++) {
 			Boolean validInput = false;
@@ -126,7 +127,7 @@ public class Battleship {
 	private static void fillSea(char[][] sea) {
 		for (char[] row: sea) {
 			for (int col = 0; col < row.length; col++) {
-				row[col] = '-';
+				row[col] = '–';
 			}
 		}
 	}
@@ -142,7 +143,7 @@ public class Battleship {
 		return match;
 	}
 
-	// Use this method to print game boards to the console.
+    // Use this method to print game boards to the console.
 	private static void printBattleShip(char[][] player) {
 		System.out.print("  ");
 		for (int row = -1; row < 5; row++) {
