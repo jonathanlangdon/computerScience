@@ -1,5 +1,4 @@
-import java.util.*;
-import java.io.*;
+import java.util.Scanner;
 
 public class Battleship {
 	public static void main(String[] args) {
@@ -82,7 +81,7 @@ public class Battleship {
 	}
 	
 	private static int[][] getHomeShips(Scanner sc, int playerNum, char[][] homeSea) {
-		int[][] homeShips = new int[5][2];
+		int[][] homeShips = {{5,1},{5,2},{5,3},{5,4},{5,0}};
 		System.out.printf("PLAYER %d, ENTER YOUR SHIPS’ COORDINATES.%n", playerNum);
 		for (int i = 0; i < 5; i++) {
 			Boolean validInput = false;
@@ -127,7 +126,7 @@ public class Battleship {
 	private static void fillSea(char[][] sea) {
 		for (char[] row: sea) {
 			for (int col = 0; col < row.length; col++) {
-				row[col] = '–';
+				row[col] = '-';
 			}
 		}
 	}
