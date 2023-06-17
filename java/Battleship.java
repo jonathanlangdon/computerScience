@@ -12,25 +12,7 @@ public class Battleship {
 		int[][] shipsArr2 = {{1,1},{2,2},{3,3},{4,4},{0,0}};
 		playGame();
 	}
-
-	// Use this method to print game boards to the console.
-	private static void printBattleShip(char[][] player) {
-		System.out.print("  ");
-		for (int row = -1; row < 5; row++) {
-			if (row > -1) {
-				System.out.print(row + " ");
-			}
-			for (int column = 0; column < 5; column++) {
-				if (row == -1) {
-					System.out.print(column + " ");
-				} else {
-					System.out.print(player[row][column] + " ");
-				}
-			}
-			System.out.println("");
-		}
-	}
-
+	
 	private static void playGame() {
 		Scanner sc = new Scanner(System.in);
 		char[][] enemySea1 = new char[5][5];
@@ -39,7 +21,7 @@ public class Battleship {
 		int hits2 = 0;
 		while(hits1 < 5 && hits2 < 5) {
 			int activePlayer = 1;
-			System.out.printf("Player %d, enter hit row/column:", activePlayer);
+			fireOnTarget(hits2, activePlayer, enemySea2);
 		}
 		int winner = 0;
 		if (hits1 == 5) winner = 1;
@@ -47,6 +29,28 @@ public class Battleship {
 		System.out.printf("PLAYER %d WINS! YOU SUNK ALL OF YOUR OPPONENT’S SHIPS!%n", winner);
 	}
 
+	private static int[][] fireOnTarget(int hits, int activePlayer, char[][] enemySea) {
+		System.out.printf("Player %d, enter hit row/column:", activePlayer);
+		Boolean validInput = false;
+		do {
+			try {
+				System.out.printf("Enter ship %d location:%n", i+1);
+				String input = sc.nextLine();
+				String[] inputArr = input.split(" ");
+				int num1 = Integer.parseInt(inputArr[0]);
+				int num2 = Integer.parseInt(inputArr[1]);
+				if (num1 > 4 || num2 > 4) throw new Exception();
+				if(enemySea[num1][num2] == 'X' || enemySea[num1][num2] == 'O') {
+					System.out.println("You already fired on this spot. Choose different coordinates.");
+					continue;
+				}
+				validInput = true;
+			} catch (Exception e) {
+				System.out.println("Invalid coordinates. Choose different coordinates.");
+			}
+		} while (!validInput);
+	}
+	
 	private static int[][] getHomeShips(int playerNum, char[][] homeSea) {
 		int[][] homeShips = new int[5][2];
 		Scanner sc = new Scanner(System.in);
@@ -65,7 +69,6 @@ public class Battleship {
 						System.out.println("You already have a ship there. Choose different coordinates.");
 						continue;
 					}
-					// checkRepeats(num1, num2, homeShips);
 					homeShips[i][0] = num1;
 					homeShips[i][1] = num2;
 					validInput = true;
@@ -103,4 +106,23 @@ public class Battleship {
 		}
 		return match;
 	}
+
+	// Use this method to print game boards to the console.
+	private static void printBattleShip(char[][] player) {
+		System.out.print("  ");
+		for (int row = -1; row < 5; row++) {
+			if (row > -1) {
+				System.out.print(row + " ");
+			}
+			for (int column = 0; column < 5; column++) {
+				if (row == -1) {
+					System.out.print(column + " ");
+				} else {
+					System.out.print(player[row][column] + " ");
+				}
+			}
+			System.out.println("");
+		}
+	}
+
 }
