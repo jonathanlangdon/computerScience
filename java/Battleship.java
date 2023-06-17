@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 public class Battleship {
 	public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class Battleship {
 	}
 
 	private static void playGame() {
-		// START HERE - ADD SCANNER for PLAYER INPUT
+		Scanner sc = new Scanner(System.in)
 		char[][] enemySea1 = new char[5][5];
 		char[][] enemySea2 = new char[5][5];
 		int hits1 = 0;
@@ -39,6 +39,7 @@ public class Battleship {
 			int activePlayer = 1;
 			System.out.printf("Player %d, enter hit row/column:", activePlayer);
 		}
+		sc.close();
 		int winner = 0;
 		if (hits1 == 5) winner = 1;
 		else winner = 2;
@@ -68,10 +69,11 @@ public class Battleship {
 					homeShips[i][1] = num2;
 					validInput = true;
 				} catch (Exception e) {
-				System.out.println("Invalid coordinates. Choose different coordinates.");
+					System.out.println("Invalid coordinates. Choose different coordinates.");
 				}
 			} while (!validInput);
 		}
+		sc.close();
 		fillSea(homeSea);
 		for (int[] ship: homeShips) {
 			homeSea[ship[0]][ship[1]] = '@';
