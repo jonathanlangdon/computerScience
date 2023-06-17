@@ -1,5 +1,4 @@
 import java.util.Scanner;
-// import java.util.Arrays;
 
 public class Battleship {
 	public static void main(String[] args) {
@@ -15,28 +14,39 @@ public class Battleship {
 	
 	private static void playGame(int[][] shipsArr1, int[][] shipsArr2) {
 		char[][] enemySea1 = new char[5][5];
+		fillSea(enemySea1);
 		char[][] enemySea2 = new char[5][5];
+		fillSea(enemySea2);
 		int hitsOn1 = 0;
 		int hitsOn2 = 0;
 		while(hitsOn1 < 5 && hitsOn2 < 5) {
-			// fireOnTarget(hitsOn2, 1, enemySea2, shipsArr2);
+			hitsOn2 = fireOnTarget(hitsOn2, 1, enemySea2, shipsArr2);
+			printBattleShip(enemySea2);
+			System.out.printf("%n");
+			if (hitsOn2 == 5) break;
 			hitsOn1 = fireOnTarget(hitsOn1, 2, enemySea1, shipsArr1);
-			System.out.printf("Player 1 has %d hits and Player 2 has %d hits%n%n", hitsOn2, hitsOn1);
+			printBattleShip(enemySea1);
+			System.out.printf("%n");
 		}
 		int winner = 0;
 		if (hitsOn1 == 5) winner = 2;
 		else winner = 1;
-		System.out.printf("PLAYER %d WINS! YOU SUNK ALL OF YOUR OPPONENT’S SHIPS!%n", winner);
+		System.out.printf("PLAYER %d WINS! YOU SUNK ALL OF YOUR OPPONENT’S SHIPS!%n%nFinal boards:%n%n", winner);
+		fillShipsNotHit(enemySea1, shipsArr1);
+		fillShipsNotHit(enemySea2, shipsArr2);
+		printBattleShip(enemySea1);
+		System.out.println("");
+		printBattleShip(enemySea2);
 	}
 
 	private static int fireOnTarget(int hits, int activePlayer, char[][] enemySea, int[][] shipsArr) {
 		Scanner sc = new Scanner(System.in);
-		System.out.printf("Player %d, enter hit row/column:", activePlayer);
 		Boolean validInput = false;
 		int num1 = 0;
 		int num2 = 0;
 		do {
 			try {
+				System.out.printf("Player %d, enter hit row/column:%n", activePlayer);
 				String input = sc.nextLine();
 				String[] inputArr = input.split(" ");
 				num1 = Integer.parseInt(inputArr[0]);
@@ -104,6 +114,13 @@ public class Battleship {
 			System.out.printf("%n");
 		}
 		return homeShips;
+	}
+
+	private static void fillShipsNotHit(char[][] enemySea, int[][] shipsArr) {
+		for (int[] ship: shipsArr) {
+			if (enemySea[ship[0]][ship[1]] != 'X')
+			enemySea[ship[0]][ship[1]] = '@';
+		}
 	}
 	
 	private static void fillSea(char[][] sea) {
