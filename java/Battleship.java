@@ -6,8 +6,10 @@ public class Battleship {
 		System.out.printf("Welcome to Battleship!%n%n");
 		char[][] homeSea1 = new char[5][5];
 		char[][] homeSea2 = new char[5][5];
-		int [][] shipsArr1 = getHomeShips(1, homeSea1);
-		int [][] shipsArr2 = getHomeShips(2, homeSea2);
+		// int [][] shipsArr1 = getHomeShips(1, homeSea1);
+		// int [][] shipsArr2 = getHomeShips(2, homeSea2);
+		int[][] shipsArr1 = {{1,1},{2,2},{3,3},{4,4},{0,0}};
+		int[][] shipsArr2 = {{1,1},{2,2},{3,3},{4,4},{0,0}};
 		playGame();
 	}
 
@@ -30,7 +32,7 @@ public class Battleship {
 	}
 
 	private static void playGame() {
-		Scanner sc = new Scanner(System.in)
+		Scanner sc = new Scanner(System.in);
 		char[][] enemySea1 = new char[5][5];
 		char[][] enemySea2 = new char[5][5];
 		int hits1 = 0;
@@ -39,7 +41,6 @@ public class Battleship {
 			int activePlayer = 1;
 			System.out.printf("Player %d, enter hit row/column:", activePlayer);
 		}
-		sc.close();
 		int winner = 0;
 		if (hits1 == 5) winner = 1;
 		else winner = 2;
@@ -73,7 +74,6 @@ public class Battleship {
 				}
 			} while (!validInput);
 		}
-		sc.close();
 		fillSea(homeSea);
 		for (int[] ship: homeShips) {
 			homeSea[ship[0]][ship[1]] = '@';
