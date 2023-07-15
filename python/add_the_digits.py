@@ -1,3 +1,5 @@
+# add all digits in a string
+
 a_string = "F1#2daDv^f%$G$25Fd"
 
 sum = 0
