@@ -19,7 +19,7 @@ if [ -n "$(ls -A ./0staging)" ]; then
     comment=$(head -n 1 "$file")
 
     # Move the file to the current directory
-    mv "$file" .
+    mv -i "$file" .
 
     # Commit the change and push it to the remote repository
     git add .
