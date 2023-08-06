@@ -9,4 +9,15 @@ def three_questions():
         if station not in stations:
             stations[station] = 0
         stations[station] += 1
-    print(f"The stations are {stations}")
+        avg = sum(stations.values()) / len(stations)
+    print(f"The average taps per station are {round(avg)}")
+    closest = (0, 999999)
+    for station in stations:
+        if abs(stations[station] - avg) < abs(closest[1] - avg):
+            closest = station, stations[station]
+    print(f"the closest to avg is {closest}")
+    sorted_station = sorted(stations.items(), key=lambda x: x[1])
+    print(f"the least used station is {sorted_station[0]}")
+
+
+three_questions()
