@@ -1,4 +1,4 @@
-// adding constructor chaining
+// adding get method for mass
 
 public class Fly {
   //instance variables
@@ -15,13 +15,18 @@ public class Fly {
     this(DEFAULT_MASS);
   }
 
-  public Fly(double initMass) {
-    this(initMass, DEFAULT_SPEED);
+  public Fly(double mass) {
+    this(mass, DEFAULT_SPEED);
   }
 
-  public Fly(double initMass, double initSpeed) {
-    mass = initMass;
-    speed = initSpeed;
+  public Fly(double mass, double speed) {
+    this.mass = mass;
+    this.speed = speed;
+  }
+
+  //methods
+  public double getMass() {
+    return this.mass;
   }
 
   public static void main() {
