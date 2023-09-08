@@ -1,4 +1,4 @@
-#
+# checks to see if there is a connect-4 winner
 
 
 def check_horiz(board):
