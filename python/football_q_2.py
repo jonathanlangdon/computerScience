@@ -1,4 +1,4 @@
-# determine first game ever played (and return the opponent)
+# determine how many points scored against Auburn
 
 
 def first_opponent():
@@ -8,14 +8,11 @@ def first_opponent():
     record_file.close()
     del record_list[0]
     record_list = [x.split(",") for x in record_list]
-    oldest_date = [9999, 99, 99]
-    oldest_opponent = ""
+    total_auburn = 0
     for record in record_list:
-        cur_date = [int(num) for num in record[0].split("-")]
-        if cur_date < oldest_date:
-            oldest_date = cur_date
-            oldest_opponent = record[1]
-    return oldest_opponent
+        if record[1] == "Auburn":
+            total_auburn += int(record[3])
+    return total_auburn
 
 
 print(first_opponent())
