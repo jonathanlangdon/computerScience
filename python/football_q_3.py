@@ -1,4 +1,4 @@
-# determine how many points scored against Auburn
+# determine how many points Auburn scored against Goergia Tech
 
 
 def first_opponent():
@@ -11,7 +11,7 @@ def first_opponent():
     total_auburn = 0
     for record in record_list:
         if record[1] == "Auburn":
-            total_auburn += int(record[3])
+            total_auburn += int(record[4])
     return total_auburn
 
 
