@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Prompt the user for the number of files to be processed
+read -p "Enter the number of files to process: " max_files
+
 # Counter for the number of files processed
 count=0
 
@@ -7,8 +10,8 @@ count=0
 if [ -n "$(ls -A ./0staging)" ]; then
   # Directly iterate over the files in the directory
   for file in ./0staging/*; do
-    # Only process the first 7 files
-    if [ $count -eq 7 ]; then
+    # Only process up to the max_files
+    if [ $count -eq $max_files ]; then
       break
     fi
 
@@ -35,5 +38,4 @@ if [ -n "$(ls -A ./0staging)" ]; then
 else
   echo "No files found in the 0staging directory"
 fi
-sleep 7
-
+sleep 5
